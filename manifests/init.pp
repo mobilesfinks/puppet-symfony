@@ -20,8 +20,8 @@ class symfony {
     include environment
     include nodejs
 
-    class {
-        'ubuntu': stage => setup, action => 'clean';
+    class { 'ubuntu':
+        stage => setup;
     }
 
     exec { 'install less node module':
