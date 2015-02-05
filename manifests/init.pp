@@ -37,16 +37,11 @@ class symfony (
         all   => true,
     }
 
-#    class { 'apache::default_mods':
-#        require => Class['apache']
-#    }
-
     class { 'apache':
         mpm_module    => prefork,
         user          => $username,
         group         => $username,
         default_vhost => false,
-        default_mods  => false,
         require       => Class['php5'];
     }
 
