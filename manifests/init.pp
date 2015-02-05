@@ -46,8 +46,7 @@ class symfony (
         user          => $username,
         group         => $username,
         default_vhost => false,
-        default_mods        => false,
-        default_confd_files => false,
+        default_mods  => false,
         require       => Class['php5'];
     }
 
