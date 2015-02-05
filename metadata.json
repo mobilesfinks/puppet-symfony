@@ -1,0 +1,38 @@
+{
+  "name": "gajdaw-symfony",
+  "version": "0.1.0",
+  "author": "Włodzimierz Gajda",
+  "summary": "Puppet module to install soft required by Symfony Standard",
+  "license": "MIT",
+  "source": "https://github.com/puppet-by-examples/puppet-symfony",
+  "project_page": "https://github.com/puppet-by-examples/puppet-symfony",
+  "issues_url": "https://github.com/puppet-by-examples/puppet-symfony/issues",
+  "tags": [
+    "symfony",
+    "symfony standard",
+    "framework",
+    "php",
+    "app",
+    "application",
+    "sandbox",
+    "boilerplate"
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "14.04"
+      ]
+    }
+  ],
+  "requirements": [
+    { "name": "puppet", "version_requirement": "3.x" }
+  ],
+  "dependencies": [
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">=4.5.0"
+    }
+  ]
+}
+
