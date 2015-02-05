@@ -76,7 +76,7 @@
     {
       "name": "gajdaw/nodejs",
       "version_requirement": ">=0.1.2"
-    },
+    }
   ]
 }
 
