@@ -11,7 +11,10 @@
 # Copyright 2015 Włodzimierz Gajda
 #
 
-class symfony {
+class symfony (
+  $username  = 'vagrant',
+  $directory = '/vagrant/web',
+) {
 
     include stdlib
     include mysql::server
@@ -36,8 +39,8 @@ class symfony {
 
     class { 'apache':
         mpm_module    => prefork,
-        user          => vagrant,
-        group         => vagrant,
+        user          => $username,
+        group         => $username,
         default_vhost => false,
         require       => Class['php5'];
     }
@@ -48,12 +51,12 @@ class symfony {
 
     apache::vhost { 'app.lh':
         port          => '80',
-        docroot       => '/vagrant/web',
-        docroot_owner => 'vagrant',
-        docroot_group => 'vagrant',
+        docroot       => $directory,
+        docroot_owner => $username,
+        docroot_group => $username,
         notify        => Service['apache2'],
         directories   => [
-            { path => '/vagrant/web',
+            { path => $directory,
                 allow_override => ['All'],
             },
         ],
