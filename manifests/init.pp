@@ -119,7 +119,7 @@ class symfony (
 
     file_line { 'apache_user':
         path    => '/etc/apache2/envvars',
-        line    => "export APACHE_RUN_USER=${username}",
+        line    => "export APACHE_RUN_USER=${param_username}",
         match   => 'export APACHE_RUN_USER=www-data',
         require => Package['php5'],
         notify  => Service['apache2'],
@@ -127,7 +127,7 @@ class symfony (
 
     file_line { 'apache_group':
         path    => '/etc/apache2/envvars',
-        line    => "export APACHE_RUN_GROUP=${username}",
+        line    => "export APACHE_RUN_GROUP=${param_username}",
         match   => 'export APACHE_RUN_GROUP=www-data',
         require => Package['php5'],
         notify  => Service['apache2'],
@@ -146,7 +146,7 @@ class symfony (
         path    => '/var/www/html',
         ensure  => link,
         force   => true,
-        target  => '/vagrant/web',
+        target  => $param_directory,
         require => [Package['php5']]
     }
 
