@@ -1,4 +1,4 @@
-# `symfony` Puppet Module
+# `gajdaw-symfony` Puppet Module
 
 #### Table of Contents
 
@@ -7,6 +7,7 @@
 3. [Usage](#usage)
 4. [Limitations](#limitations)
 5. [Development](#development)
+6. [How do I test the module?](#how-do-i-test-the-module)
 
 ## Overview
 
@@ -38,8 +39,24 @@ Known problems:
 This module is not compatible with `ppa:ondrej/php5`
 on Ubuntu 12.04. Thus you cannot use v0.1.7 on Travis.
 
-
 ## Development
 
 For development instructions visit
 [Puppet Modules Factory](https://github.com/puppet-by-examples/puppet-modules-factory)
+
+## How do I test the module?
+
+I test the module for all supported platforms:
+
+* Ubuntu 12.04 - precise - ubuntu/precise32 Vagrant box
+* Ubuntu 14.04 - trusty - ubuntu/trusty32 Vagrant box
+
+The procedure (for each platform):
+
+    in Puppet Modules Factory repo
+    set platform in Vagrantfile
+    vagrant up
+    update puppet if necessary
+    sudo puppet apply -e 'include symfony'
+    run behat/phpspec tests for the applications in sample/ directory
+
