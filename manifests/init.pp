@@ -44,6 +44,13 @@ class symfony (
         all   => true,
     }
 
+   service { 'apache2':
+      ensure     => running,
+      hasstatus  => true,
+      hasrestart => true,
+      require    => Package['php5'],
+   }
+
     exec { 'php5:mod-rewrite':
         path    => '/usr/bin:/usr/sbin:/bin',
         command => 'a2enmod rewrite',
