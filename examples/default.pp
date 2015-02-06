@@ -3,5 +3,4 @@
 # sudo puppet apply -e 'include symfony'
 #
 
-class { 'symfony':
-}
+include symfony
