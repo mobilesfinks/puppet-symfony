@@ -37,13 +37,10 @@ class symfony (
         default => $username
     }
 
-    $pwd = generate('/bin/pwd')
     $param_directory = $directory ? {
-        undef   => "${pwd}/web",
+        undef   => $::symfony::params::directory,
         default => $directory
     }
-
-    notify{"GUESSED PWD: ${pwd}": }
 
     $param_withEnvironment = $withEnvironment ? {
         undef   => $::symfony::params::withEnvironment,
