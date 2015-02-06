@@ -21,6 +21,7 @@
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
+        "12.04",
         "14.04"
       ]
     }
@@ -36,10 +37,6 @@
     {
       "name": "puppetlabs/mysql",
       "version_requirement": ">=3.1.0"
-    },
-    {
-      "name": "puppetlabs/apache",
-      "version_requirement": ">=1.2.0"
     },
     {
       "name": "puppetlabs/concat",

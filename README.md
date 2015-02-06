@@ -30,6 +30,7 @@ The module was tested on:
 
 * Ubuntu
   - 14.04 (trusty) (Vagrant box: ubuntu/trusty32)
+  - 12.04 (precise) (Vagrant box: ubuntu/precise32)
 
 Known problems:
 
