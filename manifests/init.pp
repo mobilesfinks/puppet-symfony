@@ -16,16 +16,20 @@ class symfony (
   $directory = '/vagrant/web',
 ) {
 
+    if !($::operatingsystem == 'Ubuntu' and $::lsbdistrelease == '14.04') {
+        fail('Platform not supported.')
+    }
+
     include stdlib
-    include mysql::server
-    include ::apache::mod::rewrite
-    include php5
-    include environment
-    include nodejs
 
     class { 'ubuntu':
         stage => setup;
     }
+
+    include mysql::server
+    include environment
+    include php5
+    include nodejs
 
     exec { 'install less node module':
         path    => '/usr/bin:/bin:/usr/sbin:/sbin',
@@ -36,6 +40,8 @@ class symfony (
     class { 'php_phars':
         all   => true,
     }
+
+    include ::apache::mod::rewrite
 
     class { 'apache':
         mpm_module    => prefork,
