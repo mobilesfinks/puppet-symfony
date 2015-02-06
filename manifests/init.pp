@@ -16,7 +16,10 @@ class symfony (
   $directory = '/vagrant/web',
 ) {
 
-    if !($::operatingsystem == 'Ubuntu' and $::lsbdistrelease == '14.04') {
+    if !(
+        ($::operatingsystem == 'Ubuntu' and $::lsbdistrelease == '14.04') or
+        ($::operatingsystem == 'Ubuntu' and $::lsbdistrelease == '12.04')
+    ) {
         fail('Platform not supported.')
     }
 
@@ -41,31 +44,44 @@ class symfony (
         all   => true,
     }
 
-    include ::apache::mod::rewrite
-
-    class { 'apache':
-        mpm_module    => prefork,
-        user          => $username,
-        group         => $username,
-        default_vhost => false,
-        require       => Class['php5'];
+    exec { 'php5:mod-rewrite':
+        path    => '/usr/bin:/usr/sbin:/bin',
+        command => 'a2enmod rewrite',
+        require => Package['php5'],
+        notify  => Service['apache2'],
     }
 
-    class {'::apache::mod::php':
-        path => "${::apache::params::lib_path}/libphp5.so",
+    file_line { 'apache_user':
+        path    => '/etc/apache2/envvars',
+        line    => "export APACHE_RUN_USER=${username}",
+        match   => 'export APACHE_RUN_USER=www-data',
+        require => Package['php5'],
+        notify  => Service['apache2'],
     }
 
-    apache::vhost { 'app.lh':
-        port          => '80',
-        docroot       => $directory,
-        docroot_owner => $username,
-        docroot_group => $username,
-        notify        => Service['apache2'],
-        directories   => [
-            { path => $directory,
-                allow_override => ['All'],
-            },
-        ],
+    file_line { 'apache_group':
+        path    => '/etc/apache2/envvars',
+        line    => "export APACHE_RUN_GROUP=${username}",
+        match   => 'export APACHE_RUN_GROUP=www-data',
+        require => Package['php5'],
+        notify  => Service['apache2'],
+    }
+
+    file_line { 'apache2-enable-htaccess-files':
+        path     => '/etc/apache2/apache2.conf',
+        match    => '^\s*AllowOverride None',
+        multiple => true,
+        line     => "\tAllowOverride All",
+        require  => Package['php5'],
+        notify  => Service['apache2'],
+    }
+
+    file { '/var/www/html':
+        path    => '/var/www/html',
+        ensure  => link,
+        force   => true,
+        target  => '/vagrant/web',
+        require => [Package['php5']]
     }
 
 }
