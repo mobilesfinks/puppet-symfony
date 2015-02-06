@@ -33,7 +33,7 @@ class symfony (
     include symfony::params
 
     $param_username = $username ? {
-        undef   => generate('/usr/bin/whoami'),
+        undef   => $::symfony::params::username,
         default => $username
     }
 
@@ -42,6 +42,8 @@ class symfony (
         undef   => "${pwd}/web",
         default => $directory
     }
+
+    notify{"GUESSED PWD: ${pwd}": }
 
     $param_withEnvironment = $withEnvironment ? {
         undef   => $::symfony::params::withEnvironment,

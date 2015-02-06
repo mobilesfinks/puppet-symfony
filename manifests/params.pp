@@ -2,10 +2,11 @@
 #
 class symfony::params {
 
-# Default values are autoguessed with whoami and pwd
+    $username        = 'vagrant'
+
 #
-#    $username        = 'vagrant',
-#    $directory       = '/vagrant/web',
+# Default values are autoguessed with whoami and pwd
+#    $directory       = '/vagrant/web'
 #
     $withEnvironment = true
     $withMySql       = true
