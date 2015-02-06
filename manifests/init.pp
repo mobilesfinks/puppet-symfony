@@ -14,14 +14,15 @@
 class symfony (
     $username        = undef,
     $directory       = undef,
-
     $withEnvironment = undef,
     $withMySql       = undef,
     $withNodejs      = undef,
     $withAllPhars    = undef
 ) {
 
+    #
     # Handle platforms
+    #
     if !(
         ($::operatingsystem == 'Ubuntu' and $::lsbdistrelease == '14.04') or
         ($::operatingsystem == 'Ubuntu' and $::lsbdistrelease == '12.04')
@@ -29,7 +30,10 @@ class symfony (
         fail('Platform not supported.')
     }
 
+
+    #
     # Handle parameters
+    #
     include symfony::params
 
     $param_username = $username ? {
@@ -63,7 +67,9 @@ class symfony (
     }
 
 
+    #
     # The code
+    #
     include stdlib
 
     class { 'ubuntu':
@@ -71,7 +77,6 @@ class symfony (
     }
 
     include php5
-
 
     if $param_withEnvironment {
         include environment
