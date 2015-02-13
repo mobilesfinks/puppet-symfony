@@ -1,5 +1,5 @@
 #
-# sudo puppet apply /vagrant/modules/puppet-symfony/example/minimal.pp
+# sudo puppet apply /etc/puppet/modules/symfony/example/minimal.pp
 #
 
 class { 'symfony':

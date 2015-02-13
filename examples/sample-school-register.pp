@@ -1,5 +1,5 @@
 #
-# sudo puppet apply /vagrant/modules/puppet-symfony/example/sample-school-register.pp
+# sudo puppet apply /etc/puppet/modules/symfony/example/sample-school-register.pp
 #
 
 class { 'symfony':
