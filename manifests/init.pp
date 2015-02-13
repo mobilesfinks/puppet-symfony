@@ -20,14 +20,13 @@ class symfony (
     $withAllPhars    = undef
 ) {
 
+    # validate_platform() function comes from
+    # puppet module gajdaw/diverse_functions
     #
-    # Handle platforms
+    #     https://forge.puppetlabs.com/gajdaw/diverse_functions
     #
-    if !(
-        ($::operatingsystem == 'Ubuntu' and $::lsbdistrelease == '14.04') or
-        ($::operatingsystem == 'Ubuntu' and $::lsbdistrelease == '12.04')
-    ) {
-        fail('Platform not supported.')
+    if !validate_platform($module_name) {
+        fail("Platform not supported in module '${module_name}'.")
     }
 
 

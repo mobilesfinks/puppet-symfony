@@ -69,6 +69,10 @@
     {
       "name": "gajdaw/nodejs",
       "version_requirement": ">=0.1.2"
+    },
+    {
+      "name": "gajdaw/diverse_functions",
+      "version_requirement": ">=0.1.1"
     }
   ]
 }
