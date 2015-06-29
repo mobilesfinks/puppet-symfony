@@ -107,6 +107,10 @@ class symfony (
         }
     }
 
+    class { 'composer_install':
+        require => Class['environment', 'php5', 'php_phars']
+    }
+
     service { 'apache2':
         ensure     => running,
         hasstatus  => true,
