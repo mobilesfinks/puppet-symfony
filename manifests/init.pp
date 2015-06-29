@@ -111,7 +111,7 @@ class symfony (
         ensure     => running,
         hasstatus  => true,
         hasrestart => true,
-        require    => Package['php5'],
+        require    => Class['php5'],
     }
 
     exec { 'php5:mod-rewrite':
@@ -143,7 +143,7 @@ class symfony (
         multiple => true,
         line     => "\tAllowOverride All",
         require  => Package['php5'],
-        notify  => Service['apache2'],
+        notify   => Service['apache2'],
     }
 
     file { '/var/www/html':
@@ -151,7 +151,7 @@ class symfony (
         ensure  => link,
         force   => true,
         target  => $param_directory,
-        require => [Package['php5']]
+        require => Class['php5'],
     }
 
 }
