@@ -12,12 +12,13 @@
 #
 
 class symfony (
-    $username        = undef,
-    $directory       = undef,
-    $withEnvironment = undef,
-    $withMySql       = undef,
-    $withNodejs      = undef,
-    $withAllPhars    = undef
+    $username            = undef,
+    $directory           = undef,
+    $withEnvironment     = undef,
+    $withMySql           = undef,
+    $withNodejs          = undef,
+    $withAllPhars        = undef
+    $withComposerInstall = undef
 ) {
 
     # validate_platform() function comes from
@@ -65,6 +66,11 @@ class symfony (
         default => $withAllPhars
     }
 
+    $param_withComposerInstall = $withComposerInstall ? {
+        undef   => $::symfony::params::withComposerInstall,
+        default => $withComposerInstall
+    }
+
 
     #
     # The code
@@ -107,8 +113,10 @@ class symfony (
         }
     }
 
-    class { 'composer_install':
-        require => Class['environment', 'php5', 'php_phars']
+    if $param_withComposerInstall {
+        class { 'composer_install':
+            require => Class['environment', 'php5', 'php_phars']
+        }
     }
 
     service { 'apache2':
