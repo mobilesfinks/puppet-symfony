@@ -94,9 +94,18 @@ class symfony (
     }
 
     if $param_withMySql {
-        class { '::mysql::server':
-          root_password => 'alamakota'
+
+        $override_options = {
+          'mysqld' => {
+            'bind-address' => '0.0.0.0',
+          }
         }
+
+        class { '::mysql::server':
+          root_password    => 'alamakota',
+          override_options => $override_options
+        }
+
     }
 
     if $param_withNodejs {
