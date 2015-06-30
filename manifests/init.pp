@@ -144,7 +144,8 @@ class symfony (
         docroot_group => $param_username,
         notify        => Service['apache2'],
         directories   => [
-            { path => $param_directory,
+            {
+                path           => $param_directory,
                 allow_override => ['All'],
             },
         ],
