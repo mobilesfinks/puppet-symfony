@@ -17,7 +17,7 @@ class symfony (
     $withEnvironment     = undef,
     $withMySql           = undef,
     $withNodejs          = undef,
-    $withAllPhars        = undef
+    $withAllPhars        = undef,
     $withComposerInstall = undef
 ) {
 
