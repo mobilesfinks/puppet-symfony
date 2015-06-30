@@ -134,8 +134,7 @@ class symfony (
     }
 
     class { '::apache::mod::php':
-        path    => "${::apache::params::lib_path}/libphp5.so",
-        require => Class['apache'];
+        path => "${::apache::params::lib_path}/libphp5.so",
     }
 
     apache::vhost { 'app.lh':
