@@ -13,6 +13,12 @@
 
 This module installs all the software required by Symfony Standard.
 
+There are two independend versions supposed to work on two platforms:
+
+- Ubuntu 12.04 - version stored in branch 1.0
+- Ubuntu 14.04 - version stored in branch 2.0
+
+
 ## Setup
 
 To install the module run:
