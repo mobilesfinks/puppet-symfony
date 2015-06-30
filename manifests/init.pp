@@ -18,7 +18,8 @@ class symfony (
     $withMySql           = undef,
     $withNodejs          = undef,
     $withAllPhars        = undef,
-    $withComposerInstall = undef
+    $withComposerInstall = undef,
+    $withPhpMyAdmin      = undef
 ) {
 
     # validate_platform() function comes from
@@ -71,6 +72,11 @@ class symfony (
         default => $withComposerInstall
     }
 
+    $param_withPhpMyAdmin = $withPhpMyAdmin ? {
+        undef   => $::symfony::params::withPhpMyAdmin,
+        default => $withPhpMyAdmin
+    }
+
 
     #
     # The code
@@ -88,7 +94,9 @@ class symfony (
     }
 
     if $param_withMySql {
-        include mysql::server
+        class { '::mysql::server':
+          root_password => 'alamakota'
+        }
     }
 
     if $param_withNodejs {
@@ -149,6 +157,11 @@ class symfony (
                 allow_override => ['All'],
             },
         ],
+    }
+
+    if $param_withPhpMyAdmin {
+        include phpmyadmin
+        include phpmyadmin::vhost
     }
 
 }

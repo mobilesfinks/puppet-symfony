@@ -8,4 +8,5 @@ class symfony::params {
     $withNodejs          = true
     $withAllPhars        = true
     $withComposerInstall = true
+    $withPhpMyAdmin      = true
 }
