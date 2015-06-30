@@ -119,51 +119,35 @@ class symfony (
         }
     }
 
-    service { 'apache2':
-        ensure     => running,
-        hasstatus  => true,
-        hasrestart => true,
-        require    => Class['php5'],
+    #
+    # Apache module
+    #
+    #
+    include ::apache::mod::rewrite
+
+    class { 'apache':
+        mpm_module    => prefork,
+        user          => $username,
+        group         => $username,
+        default_vhost => false,
+        require       => Class['php5'];
     }
 
-    exec { 'php5:mod-rewrite':
-        path    => '/usr/bin:/usr/sbin:/bin',
-        command => 'a2enmod rewrite',
-        require => Package['php5'],
-        notify  => Service['apache2'],
+    class {'::apache::mod::php':
+        path => "${::apache::params::lib_path}/libphp5.so",
     }
 
-    file_line { 'apache_user':
-        path    => '/etc/apache2/envvars',
-        line    => "export APACHE_RUN_USER=${param_username}",
-        match   => 'export APACHE_RUN_USER=www-data',
-        require => Package['php5'],
-        notify  => Service['apache2'],
-    }
-
-    file_line { 'apache_group':
-        path    => '/etc/apache2/envvars',
-        line    => "export APACHE_RUN_GROUP=${param_username}",
-        match   => 'export APACHE_RUN_GROUP=www-data',
-        require => Package['php5'],
-        notify  => Service['apache2'],
-    }
-
-    file_line { 'apache2-enable-htaccess-files':
-        path     => '/etc/apache2/apache2.conf',
-        match    => '^\s*AllowOverride None',
-        multiple => true,
-        line     => "\tAllowOverride All",
-        require  => Package['php5'],
-        notify   => Service['apache2'],
-    }
-
-    file { '/var/www/html':
-        path    => '/var/www/html',
-        ensure  => link,
-        force   => true,
-        target  => $param_directory,
-        require => Class['php5'],
+    apache::vhost { 'app.lh':
+        port          => '80',
+        docroot       => $directory,
+        docroot_owner => $username,
+        docroot_group => $username,
+        notify        => Service['apache2'],
+        directories   => [
+            { path => $directory,
+                allow_override => ['All'],
+            },
+        ],
     }
 
 }
