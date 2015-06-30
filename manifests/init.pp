@@ -17,7 +17,7 @@ class symfony (
     $withEnvironment     = undef,
     $withMySql           = undef,
     $withNodejs          = undef,
-    $withAllPhars        = undef
+    $withAllPhars        = undef,
     $withComposerInstall = undef
 ) {
 
@@ -127,24 +127,25 @@ class symfony (
 
     class { 'apache':
         mpm_module    => prefork,
-        user          => $username,
-        group         => $username,
+        user          => $param_username,
+        group         => $param_username,
         default_vhost => false,
         require       => Class['php5'];
     }
 
-    class {'::apache::mod::php':
-        path => "${::apache::params::lib_path}/libphp5.so",
+    class { '::apache::mod::php':
+        path    => "${::apache::params::lib_path}/libphp5.so",
+        require => Class['apache'];
     }
 
     apache::vhost { 'app.lh':
         port          => '80',
-        docroot       => $directory,
-        docroot_owner => $username,
-        docroot_group => $username,
+        docroot       => $param_directory,
+        docroot_owner => $param_username,
+        docroot_group => $param_username,
         notify        => Service['apache2'],
         directories   => [
-            { path => $directory,
+            { path => $param_directory,
                 allow_override => ['All'],
             },
         ],
