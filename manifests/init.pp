@@ -105,7 +105,7 @@ class symfony (
 
     if $param_withAllPhars {
         class { 'php_phars':
-            all   => true,
+            all => true,
         }
     } else {
         class { 'php_phars':
