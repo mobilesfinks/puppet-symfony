@@ -134,7 +134,7 @@ class symfony (
 
     if $param_withAllPhars {
         class { 'php_phars':
-            all => true,
+            phars => ['composer', 'phpunit', 'box', 'php-cs-fixer'],
         }
     } else {
         class { 'php_phars':
