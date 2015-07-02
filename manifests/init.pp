@@ -19,7 +19,9 @@ class symfony (
     $withNodejs          = undef,
     $withAllPhars        = undef,
     $withComposerInstall = undef,
-    $withPhpMyAdmin      = undef
+    $withPhpMyAdmin      = undef,
+    $repo                = undef,
+    $branch              = undef
 ) {
 
     # validate_platform() function comes from
@@ -77,6 +79,16 @@ class symfony (
         default => $withPhpMyAdmin
     }
 
+    $param_repo = $repo ? {
+        undef   => $::symfony::params::repo,
+        default => $repo
+    }
+
+    $param_branch = $branch ? {
+        undef   => $::symfony::params::branch,
+        default => $branch
+    }
+
 
     #
     # The code
@@ -132,6 +144,8 @@ class symfony (
 
     if $param_withComposerInstall {
         class { 'composer_install':
+            repo    => $param_repo,
+            branch  => $param_branch,
             require => Class['environment', 'php5', 'php_phars']
         }
     }
