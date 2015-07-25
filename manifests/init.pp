@@ -17,6 +17,7 @@ class symfony (
     $directory           = undef,
     $withEnvironment     = undef,
     $withMySql           = undef,
+    $mysqlRootPassword   = undef,
     $withNodejs          = undef,
     $withAllPhars        = undef,
     $withComposerInstall = undef,
@@ -64,6 +65,11 @@ class symfony (
     $param_withMySql = $withMySql ? {
         undef   => $::symfony::params::withMySql,
         default => $withMySql
+    }
+
+    $param_mysqlRootPassword = $mysqlRootPassword ? {
+        undef   => $::symfony::params::mysqlRootPassword,
+        default => $mysqlRootPassword
     }
 
     $param_withNodejs = $withNodejs ? {
@@ -127,7 +133,7 @@ class symfony (
         }
 
         class { '::mysql::server':
-          root_password    => 's-e-c-r-e-t-PA55w0rd',
+          root_password    => $param_mysqlRootPassword,
           override_options => $override_options
         }
 

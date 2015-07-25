@@ -6,6 +6,7 @@ class symfony::params {
     $directory           = '/vagrant/web'
     $withEnvironment     = true
     $withMySql           = true
+    $mysqlRootPassword   = 's-e-c-r-e-t-PA55w0rd'
     $withNodejs          = true
     $withAllPhars        = true
     $withComposerInstall = true
