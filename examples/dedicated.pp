@@ -4,7 +4,7 @@
 
 class { 'symfony':
     appDomain           => 'lorem.ipsum.net',
-    withEnvironment     => false,
+    withEnvironment     => true,
     withMySql           => true,
     mysqlRootPassword   => 'what-is-it123',
     withNodejs          => false,
