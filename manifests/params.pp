@@ -12,6 +12,9 @@ class symfony::params {
     $withComposerInstall = true
     $withPhpMyAdmin      = true
     $withRabbitMQ        = true
+    $rabbitMQHost        = 'rabbit_mq_host'
+    $rabbitMQUser        = 'RabbitMQUser'
+    $rabbitMQPassword    = 'passR-A-B-B-I-T123'
     $repo                = 'https://github.com/by-examples/symfony-standard.git'
     $branch              = '2.6.4/Full.6'
 }

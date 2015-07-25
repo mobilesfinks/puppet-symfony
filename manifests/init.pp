@@ -23,6 +23,9 @@ class symfony (
     $withComposerInstall = undef,
     $withPhpMyAdmin      = undef,
     $withRabbitMQ        = undef,
+    $rabbitMQHost        = undef,
+    $rabbitMQUser        = undef,
+    $rabbitMQPassword    = undef,
     $repo                = undef,
     $branch              = undef
 ) {
@@ -95,6 +98,21 @@ class symfony (
     $param_withRabbitMQ = $withRabbitMQ ? {
         undef   => $::symfony::params::withRabbitMQ,
         default => $withRabbitMQ
+    }
+
+    $param_rabbitMQHost = $rabbitMQHost ? {
+        undef   => $::symfony::params::rabbitMQHost,
+        default => $rabbitMQHost
+    }
+
+    $param_rabbitMQUser = $rabbitMQUser ? {
+        undef   => $::symfony::params::rabbitMQUser,
+        default => $rabbitMQUser
+    }
+
+    $param_rabbitMQPassword = $rabbitMQPassword ? {
+        undef   => $::symfony::params::rabbitMQPassword,
+        default => $rabbitMQPassword
     }
 
     $param_repo = $repo ? {
@@ -209,26 +227,26 @@ class symfony (
     if $param_withRabbitMQ {
 
         class { '::rabbitmq':
-          manage_repos      => true,
-          version           => '3.5.3',
-          service_manage    => true,
-          port              => '5672',
-          delete_guest_user => true,
+            manage_repos      => true,
+            version           => '3.5.3',
+            service_manage    => true,
+            port              => '5672',
+            delete_guest_user => true,
         }
 
-        rabbitmq_vhost { 'rabbit_mq_host':
-          ensure => present,
+        rabbitmq_vhost { $param_rabbitMQHost:
+            ensure => present,
         }
 
-        rabbitmq_user { 'RabbitMQUser':
-          admin    => true,
-          password => 'passR-A-B-B-I-T123'
+        rabbitmq_user { $param_rabbitMQUser:
+            admin    => true,
+            password => $param_rabbitMQPassword
         }
 
-        rabbitmq_user_permissions { 'RabbitMQUser@rabbit_mq_host':
-          configure_permission => '.*',
-          read_permission      => '.*',
-          write_permission     => '.*',
+        rabbitmq_user_permissions { "${$param_rabbitMQUser}@${$param_rabbitMQHost}":
+            configure_permission => '.*',
+            read_permission      => '.*',
+            write_permission     => '.*',
         }
 
     }
