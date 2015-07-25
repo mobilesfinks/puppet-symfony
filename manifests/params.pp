@@ -10,6 +10,7 @@ class symfony::params {
     $withAllPhars        = true
     $withComposerInstall = true
     $withPhpMyAdmin      = true
+    $withRabbitMQ        = true
     $repo                = 'https://github.com/by-examples/symfony-standard.git'
     $branch              = '2.6.4/Full.6'
 }

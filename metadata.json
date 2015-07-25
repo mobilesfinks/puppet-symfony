@@ -34,12 +34,20 @@
       "version_requirement": ">=4.5.0"
     },
     {
+      "name": "puppetlabs/apt",
+      "version_requirement": ">=2.1.0"
+    },
+    {
       "name": "puppetlabs/apache",
       "version_requirement": ">=1.2.0"
     },
     {
       "name": "puppetlabs/mysql",
       "version_requirement": ">=3.1.0"
+    },
+    {
+      "name": "puppetlabs/rabbitmq",
+      "version_requirement": ">=5.2.3"
     },
     {
       "name": "maestrodev/wget",

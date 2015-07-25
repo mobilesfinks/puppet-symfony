@@ -21,6 +21,7 @@ class symfony (
     $withAllPhars        = undef,
     $withComposerInstall = undef,
     $withPhpMyAdmin      = undef,
+    $withRabbitMQ        = undef,
     $repo                = undef,
     $branch              = undef
 ) {
@@ -85,6 +86,11 @@ class symfony (
         default => $withPhpMyAdmin
     }
 
+    $param_withRabbitMQ = $withRabbitMQ ? {
+        undef   => $::symfony::params::withRabbitMQ,
+        default => $withRabbitMQ
+    }
+
     $param_repo = $repo ? {
         undef   => $::symfony::params::repo,
         default => $repo
@@ -100,6 +106,7 @@ class symfony (
     # The code
     #
     include stdlib
+    include apt
 
     class { 'ubuntu':
         stage => setup;
@@ -120,7 +127,7 @@ class symfony (
         }
 
         class { '::mysql::server':
-          root_password    => 'alamakota',
+          root_password    => 's-e-c-r-e-t-PA55w0rd',
           override_options => $override_options
         }
 
@@ -191,6 +198,33 @@ class symfony (
     if $param_withPhpMyAdmin {
         include phpmyadmin
         include phpmyadmin::vhost
+    }
+
+    if $param_withRabbitMQ {
+
+        class { '::rabbitmq':
+          manage_repos      => true,
+          version           => '3.5.3',
+          service_manage    => true,
+          port              => '5672',
+          delete_guest_user => true,
+        }
+
+        rabbitmq_vhost { 'rabbit_mq_host':
+          ensure => present,
+        }
+
+        rabbitmq_user { 'RabbitMQUser':
+          admin    => true,
+          password => 'passR-A-B-B-I-T123'
+        }
+
+        rabbitmq_user_permissions { 'RabbitMQUser@rabbit_mq_host':
+          configure_permission => '.*',
+          read_permission      => '.*',
+          write_permission     => '.*',
+        }
+
     }
 
 }
