@@ -206,8 +206,8 @@ class symfony (
     }
 
     file_line { 'add_domain_in_hosts_file':
-        path    => '/etc/hosts',
-        line    => "127.0.0.1   ${param_appDomain}"
+        path => '/etc/hosts',
+        line => "127.0.0.1   ${param_appDomain}"
     }
 
     apache::vhost { $param_appDomain:
@@ -248,7 +248,8 @@ class symfony (
             password => $param_rabbitMQPassword
         }
 
-        rabbitmq_user_permissions { "${$param_rabbitMQUser}@${$param_rabbitMQHost}":
+        $perm = "${$param_rabbitMQUser}@${$param_rabbitMQHost}"
+        rabbitmq_user_permissions { $perm:
             configure_permission => '.*',
             read_permission      => '.*',
             write_permission     => '.*',
