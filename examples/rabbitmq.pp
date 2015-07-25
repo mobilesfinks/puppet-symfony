@@ -1,10 +1,10 @@
 #
-# sudo puppet apply /etc/puppet/modules/symfony/example/phpmyadmin.pp
+# sudo puppet apply /etc/puppet/modules/symfony/example/rabbitmq.pp
 #
 
 class { 'symfony':
     withNodejs          => false,
     withAllPhars        => false,
     withComposerInstall => false,
-    withRabbitMQ        => false
+    withPhpMyAdmin      => false
 }
