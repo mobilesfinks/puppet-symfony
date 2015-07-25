@@ -12,6 +12,7 @@
 #
 
 class symfony (
+    $appDomain           = undef,
     $username            = undef,
     $directory           = undef,
     $withEnvironment     = undef,
@@ -38,6 +39,11 @@ class symfony (
     # Handle parameters
     #
     include symfony::params
+
+    $param_appDomain = $appDomain ? {
+        undef   => $::symfony::params::appDomain,
+        default => $appDomain
+    }
 
     $param_username = $username ? {
         undef   => $::symfony::params::username,
@@ -168,7 +174,7 @@ class symfony (
         path => "${::apache::params::lib_path}/libphp5.so",
     }
 
-    apache::vhost { 'app.lh':
+    apache::vhost { $param_appDomain:
         port          => '80',
         docroot       => $param_directory,
         docroot_owner => $param_username,

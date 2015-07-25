@@ -1,6 +1,7 @@
 # = Class: symfony::params
 #
 class symfony::params {
+    $appDomain           = 'app.lh'
     $username            = 'vagrant'
     $directory           = '/vagrant/web'
     $withEnvironment     = true
