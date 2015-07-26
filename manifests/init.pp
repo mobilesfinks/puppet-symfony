@@ -210,6 +210,13 @@ class symfony (
         line => "127.0.0.1   ${param_appDomain}"
     }
 
+#    file { $param_directory:
+#        ensure => directory,
+#        mode   => '2775',
+#        owner  => $param_username,
+#        group  => $param_username
+#    }
+
     apache::vhost { $param_appDomain:
         port          => '80',
         docroot       => $param_directory,
