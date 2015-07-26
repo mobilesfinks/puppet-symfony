@@ -31,7 +31,7 @@
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">=4.5.0"
+      "version_requirement": ">=4.5.1"
     },
     {
       "name": "puppetlabs/apt",
@@ -39,11 +39,19 @@
     },
     {
       "name": "puppetlabs/apache",
-      "version_requirement": ">=1.2.0"
+      "version_requirement": ">=1.5.0"
+    },
+    {
+      "name": "puppetlabs/concat",
+      "version_requirement": ">=1.2.4"
     },
     {
       "name": "puppetlabs/mysql",
-      "version_requirement": ">=3.1.0"
+      "version_requirement": ">=3.4.0"
+    },
+    {
+      "name": "nanliu-staging",
+      "version_requirement": ">=1.0.3"
     },
     {
       "name": "puppetlabs/rabbitmq",
@@ -51,15 +59,15 @@
     },
     {
       "name": "maestrodev/wget",
-      "version_requirement": ">=1.5.7"
+      "version_requirement": ">=1.7.0"
     },
     {
       "name": "gajdaw/ubuntu",
-      "version_requirement": ">=0.1.11"
+      "version_requirement": ">=0.1.13"
     },
     {
       "name": "gajdaw/php_phars",
-      "version_requirement": ">=0.1.8"
+      "version_requirement": ">=0.2.0"
     },
     {
       "name": "gajdaw/filefetcher",
@@ -67,11 +75,11 @@
     },
     {
       "name": "gajdaw/environment",
-      "version_requirement": ">=0.1.2"
+      "version_requirement": ">=0.1.4"
     },
     {
       "name": "gajdaw/php5",
-      "version_requirement": ">=0.1.6"
+      "version_requirement": ">=0.3.2"
     },
     {
       "name": "gajdaw/vcsrepository",
@@ -79,7 +87,7 @@
     },
     {
       "name": "gajdaw/nodejs",
-      "version_requirement": ">=0.1.2"
+      "version_requirement": ">=0.2.2"
     },
     {
       "name": "gajdaw/diverse_functions",
