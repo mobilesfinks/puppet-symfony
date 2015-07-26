@@ -205,7 +205,7 @@ class symfony (
         path => "${::apache::params::lib_path}/libphp5.so",
     }
 
-    file_line { 'add_domain_in_hosts_file':
+    file_line { "add_${param_appDomain}_in_hosts_file":
         path => '/etc/hosts',
         line => "127.0.0.1   ${param_appDomain}"
     }
