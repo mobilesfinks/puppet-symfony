@@ -84,6 +84,14 @@
     {
       "name": "gajdaw/diverse_functions",
       "version_requirement": ">=0.1.1"
+    },
+    {
+      "name": "gajdaw/composer_install",
+      "version_requirement": ">=0.3.0"
+    },
+    {
+      "name": "gajdaw/phpmyadmin",
+      "version_requirement": ">=0.3.0"
     }
   ]
 }
