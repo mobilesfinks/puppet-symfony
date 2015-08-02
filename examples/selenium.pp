@@ -3,6 +3,7 @@
 #
 
 class { 'symfony':
+    withMySql           => false,
     withNodejs          => false,
     withAllPhars        => false,
     withComposerInstall => false,
