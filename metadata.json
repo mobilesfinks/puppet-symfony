@@ -1,6 +1,6 @@
 {
   "name": "gajdaw-symfony",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "author": "Włodzimierz Gajda",
   "summary": "Puppet module to install soft required by Symfony Standard",
   "license": "MIT",
