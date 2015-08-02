@@ -7,5 +7,5 @@ class { 'symfony':
     withAllPhars        => false,
     withComposerInstall => false,
     withPhpMyAdmin      => false,
-    withSelenium        => false
+    withRabbitMQ        => false
 }

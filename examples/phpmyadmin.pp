@@ -6,5 +6,6 @@ class { 'symfony':
     withNodejs          => false,
     withAllPhars        => false,
     withComposerInstall => false,
-    withRabbitMQ        => false
+    withRabbitMQ        => false,
+    withSelenium        => false
 }

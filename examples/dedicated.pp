@@ -14,5 +14,6 @@ class { 'symfony':
     withRabbitMQ        => true,
     rabbitMQHost        => 'rab_host',
     rabbitMQUser        => 'rab_user',
-    rabbitMQPassword    => 'rab_password'
+    rabbitMQPassword    => 'rab_password',
+    withSelenium        => true
 }

@@ -27,7 +27,8 @@ class symfony (
     $rabbitMQUser        = undef,
     $rabbitMQPassword    = undef,
     $repo                = undef,
-    $branch              = undef
+    $branch              = undef,
+    $withSelenium        = undef
 ) {
 
     # validate_platform() function comes from
@@ -123,6 +124,11 @@ class symfony (
     $param_branch = $branch ? {
         undef   => $::symfony::params::branch,
         default => $branch
+    }
+
+    $param_withSelenium = $withSelenium ? {
+        undef   => $::symfony::params::withSelenium,
+        default => $withSelenium
     }
 
 
@@ -262,6 +268,10 @@ class symfony (
             write_permission     => '.*',
         }
 
+    }
+
+    if $param_withSelenium {
+        include selenium
     }
 
 }

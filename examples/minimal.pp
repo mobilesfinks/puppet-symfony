@@ -8,5 +8,6 @@ class { 'symfony':
     withAllPhars        => false,
     withComposerInstall => false,
     withPhpMyAdmin      => false,
-    withRabbitMQ        => false
+    withRabbitMQ        => false,
+    withSelenium        => false
 }
