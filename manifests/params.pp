@@ -18,4 +18,5 @@ class symfony::params {
     $repo                = 'https://github.com/by-examples/symfony-standard.git'
     $branch              = '2.6.4/Full.6'
     $withSelenium        = true
+    $withRedis           = true
 }

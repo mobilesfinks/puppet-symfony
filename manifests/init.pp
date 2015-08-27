@@ -28,7 +28,8 @@ class symfony (
     $rabbitMQPassword    = undef,
     $repo                = undef,
     $branch              = undef,
-    $withSelenium        = undef
+    $withSelenium        = undef,
+    $withRedis           = undef
 ) {
 
     # validate_platform() function comes from
@@ -131,6 +132,10 @@ class symfony (
         default => $withSelenium
     }
 
+    $param_withRedis = $withRedis ? {
+        undef   => $::symfony::params::withRedis,
+        default => $withRedis
+    }
 
     #
     # The code
@@ -265,6 +270,10 @@ class symfony (
 
     if $param_withSelenium {
         include selenium
+    }
+
+    if $param_withRedis {
+        include redis
     }
 
 }
