@@ -19,4 +19,5 @@ class symfony::params {
     $branch              = '2.6.4/Full.6'
     $withSelenium        = true
     $withRedis           = true
+    $withDEVSettings     = true
 }

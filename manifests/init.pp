@@ -29,7 +29,8 @@ class symfony (
     $repo                = undef,
     $branch              = undef,
     $withSelenium        = undef,
-    $withRedis           = undef
+    $withRedis           = undef,
+    $withDEVSettings     = undef
 ) {
 
     # validate_platform() function comes from
@@ -137,6 +138,11 @@ class symfony (
         default => $withRedis
     }
 
+    $param_withDEVSettings = $withDEVSettings ? {
+        undef   => $::symfony::params::withDEVSettings,
+        default => $withDEVSettings
+    }
+
     #
     # The code
     #
@@ -155,10 +161,18 @@ class symfony (
 
     if $param_withMySql {
 
-        $override_options = {
-          'mysqld' => {
-            'bind-address' => '0.0.0.0',
-          }
+        if $param_withDEVSettings {
+
+            $override_options = {
+              'mysqld' => {
+                'bind-address' => '0.0.0.0',
+              }
+            }
+
+        } else {
+
+            $override_options = { }
+
         }
 
         class { '::mysql::server':
@@ -216,28 +230,34 @@ class symfony (
         path => "${::apache::params::lib_path}/libphp5.so",
     }
 
-    file_line { "add_${param_appDomain}_in_hosts_file":
-        path => '/etc/hosts',
-        line => "127.0.0.1   ${param_appDomain}"
-    }
+    if $param_withDEVSettings {
 
-    apache::vhost { $param_appDomain:
-        port          => '80',
-        docroot       => $param_directory,
-        docroot_owner => $param_username,
-        docroot_group => $param_username,
-        notify        => Service['apache2'],
-        directories   => [
-            {
-                path           => $param_directory,
-                allow_override => ['All'],
-            },
-        ],
+        file_line { "add_${param_appDomain}_in_hosts_file":
+            path => '/etc/hosts',
+            line => "127.0.0.1   ${param_appDomain}"
+        }
+
+        apache::vhost { $param_appDomain:
+            port          => '80',
+            docroot       => $param_directory,
+            docroot_owner => $param_username,
+            docroot_group => $param_username,
+            notify        => Service['apache2'],
+            directories   => [
+                {
+                    path           => $param_directory,
+                    allow_override => ['All'],
+                },
+            ],
+        }
+
     }
 
     if $param_withPhpMyAdmin {
         include phpmyadmin
-        include phpmyadmin::vhost
+        if $param_withDEVSettings {
+            include phpmyadmin::vhost
+        }
     }
 
     if $param_withRabbitMQ {
@@ -250,22 +270,23 @@ class symfony (
             delete_guest_user => true,
         }
 
-        rabbitmq_vhost { $param_rabbitMQHost:
-            ensure => present,
-        }
+        if $param_withDEVSettings {
+            rabbitmq_vhost { $param_rabbitMQHost:
+                ensure => present,
+            }
 
-        rabbitmq_user { $param_rabbitMQUser:
-            admin    => true,
-            password => $param_rabbitMQPassword
-        }
+            rabbitmq_user { $param_rabbitMQUser:
+                admin    => true,
+                password => $param_rabbitMQPassword
+            }
 
-        $perm = "${$param_rabbitMQUser}@${$param_rabbitMQHost}"
-        rabbitmq_user_permissions { $perm:
-            configure_permission => '.*',
-            read_permission      => '.*',
-            write_permission     => '.*',
+            $perm = "${$param_rabbitMQUser}@${$param_rabbitMQHost}"
+            rabbitmq_user_permissions { $perm:
+                configure_permission => '.*',
+                read_permission      => '.*',
+                write_permission     => '.*',
+            }
         }
-
     }
 
     if $param_withSelenium {

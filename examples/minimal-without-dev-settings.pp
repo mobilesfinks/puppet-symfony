@@ -1,7 +1,3 @@
-#
-# sudo puppet apply /etc/puppet/modules/symfony/example/minimal.pp
-#
-
 class { 'symfony':
     withEnvironment     => false,
     withMySql           => false,
@@ -11,5 +7,6 @@ class { 'symfony':
     withPhpMyAdmin      => false,
     withRabbitMQ        => false,
     withSelenium        => false,
-    withRedis           => false
+    withRedis           => false,
+    withDEVSettings     => false
 }
