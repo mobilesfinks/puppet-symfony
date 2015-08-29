@@ -257,7 +257,7 @@ class symfony (
         include phpmyadmin
         if $param_withDEVSettings {
             class {'phpmyadmin::vhost':
-                require => Class['environment', 'apache']
+                require => Class['environment']
             }
         }
     }
