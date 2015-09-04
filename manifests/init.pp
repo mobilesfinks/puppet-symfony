@@ -156,7 +156,14 @@ class symfony (
     include php5
 
     if $param_withEnvironment {
-        include environment
+        if $param_withDEVSettings {
+            include environment
+        } else {
+            class { 'environment':
+                modifyProfileFiles => false
+            }
+        }
+
     }
 
     if $param_withMySql {
