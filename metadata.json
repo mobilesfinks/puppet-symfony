@@ -30,87 +30,87 @@
   ],
   "dependencies": [
     {
-      "name": "puppetlabs/stdlib",
+      "name": "puppetlabs-stdlib",
       "version_requirement": ">=4.5.1"
     },
     {
-      "name": "puppetlabs/apt",
+      "name": "puppetlabs-apt",
       "version_requirement": ">=2.1.0"
     },
     {
-      "name": "puppetlabs/apache",
+      "name": "puppetlabs-apache",
       "version_requirement": ">=1.5.0"
     },
     {
-      "name": "puppetlabs/concat",
+      "name": "puppetlabs-concat",
       "version_requirement": ">=1.2.4"
     },
     {
-      "name": "puppetlabs/mysql",
+      "name": "puppetlabs-mysql",
       "version_requirement": ">=3.4.0"
+    },
+    {
+      "name": "puppetlabs-rabbitmq",
+      "version_requirement": ">=5.2.3"
     },
     {
       "name": "nanliu-staging",
       "version_requirement": ">=1.0.3"
     },
     {
-      "name": "puppetlabs/rabbitmq",
-      "version_requirement": ">=5.2.3"
-    },
-    {
-      "name": "arioch/redis",
+      "name": "arioch-redis",
       "version_requirement": ">=1.1.3"
     },
     {
-      "name": "maestrodev/wget",
+      "name": "maestrodev-wget",
       "version_requirement": ">=1.7.0"
     },
     {
-      "name": "camptocamp/puppet-openssl",
+      "name": "camptocamp-openssl",
       "version_requirement": ">=1.3.10"
     },
     {
-      "name": "gajdaw/ubuntu",
+      "name": "gajdaw-ubuntu",
       "version_requirement": ">=0.1.13"
     },
     {
-      "name": "gajdaw/php_phars",
+      "name": "gajdaw-php_phars",
       "version_requirement": ">=0.2.0"
     },
     {
-      "name": "gajdaw/filefetcher",
+      "name": "gajdaw-filefetcher",
       "version_requirement": ">=0.1.6"
     },
     {
-      "name": "gajdaw/environment",
+      "name": "gajdaw-environment",
       "version_requirement": ">=0.1.4"
     },
     {
-      "name": "gajdaw/php5",
+      "name": "gajdaw-php5",
       "version_requirement": ">=0.3.2"
     },
     {
-      "name": "gajdaw/vcsrepository",
+      "name": "gajdaw-vcsrepository",
       "version_requirement": ">=0.1.3"
     },
     {
-      "name": "gajdaw/nodejs",
+      "name": "gajdaw-nodejs",
       "version_requirement": ">=0.2.2"
     },
     {
-      "name": "gajdaw/diverse_functions",
+      "name": "gajdaw-diverse_functions",
       "version_requirement": ">=0.1.1"
     },
     {
-      "name": "gajdaw/composer_install",
+      "name": "gajdaw-composer_install",
       "version_requirement": ">=0.3.0"
     },
     {
-      "name": "gajdaw/phpmyadmin",
+      "name": "gajdaw-phpmyadmin",
       "version_requirement": ">=0.3.0"
     },
     {
-      "name": "gajdaw/selenium",
+      "name": "gajdaw-selenium",
       "version_requirement": ">=0.1.0"
     }
   ]
