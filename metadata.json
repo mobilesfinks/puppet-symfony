@@ -66,6 +66,10 @@
       "version_requirement": ">=1.7.0"
     },
     {
+      "name": "camptocamp/puppet-openssl",
+      "version_requirement": ">=1.3.10"
+    },
+    {
       "name": "gajdaw/ubuntu",
       "version_requirement": ">=0.1.13"
     },

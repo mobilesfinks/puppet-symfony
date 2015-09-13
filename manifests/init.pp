@@ -223,6 +223,12 @@ class symfony (
     # Apache module
     #
     #
+    openssl::certificate::x509 { $param_appDomain:
+        country      => 'PL',
+        organization => 'Example organization',
+        commonname   => $param_appDomain,
+    }
+
     include ::apache::mod::rewrite
 
     class { 'apache':
@@ -239,12 +245,12 @@ class symfony (
 
     if $param_withDEVSettings {
 
-        file_line { "add_${param_appDomain}_in_hosts_file":
-            path => '/etc/hosts',
-            line => "127.0.0.1   ${param_appDomain}"
+        host { $param_appDomain:
+            ip => '127.0.0.1'
         }
 
-        apache::vhost { $param_appDomain:
+        apache::vhost { "http ${param_appDomain}":
+            servername    => $param_appDomain,
             port          => '80',
             docroot       => $param_directory,
             docroot_owner => $param_username,
@@ -258,6 +264,23 @@ class symfony (
             ],
         }
 
+        apache::vhost { "https ${param_appDomain}":
+            servername    => $param_appDomain,
+            port          => '443',
+            ssl           => true,
+            ssl_cert      => "/etc/ssl/certs/${param_appDomain}.crt",
+            ssl_key       => "/etc/ssl/certs/${param_appDomain}.key",
+            docroot       => $param_directory,
+            docroot_owner => $param_username,
+            docroot_group => $param_username,
+            notify        => Service['apache2'],
+            directories   => [
+                {
+                    path           => $param_directory,
+                    allow_override => ['All'],
+                },
+            ],
+        }
     }
 
     if $param_withPhpMyAdmin {
