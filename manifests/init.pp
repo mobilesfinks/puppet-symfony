@@ -107,10 +107,6 @@ class symfony (
         class { 'php_phars':
             all   => true,
         }
-    } else {
-        class { 'php_phars':
-            phars => ['composer'],
-        }
     }
 
     if $param_withComposerInstall {
